@@ -55,7 +55,7 @@ python3 "$S" list "片名" [--lang zh] [--season 2]  # 列出全部版本,按评
 python3 "$S" download --id <id> --pick 3           # 下载 list 里的第 3 张(--lang/--season 要与 list 时一致)
 ```
 
-配了 key 之后默认下载的是作品原语言里评分最高的一张,搜索中文片名时返回的也是中文片名。
+配了 key 之后默认下载的是作品原语言里评分最高的一张,搜索中文片名时返回的也是中文片名。评分最高的那张不一定最大:用户明确要「最大」「最高清」的版本时加 `--largest`(可与 `--lang`、`--season` 合用);没加而返回的 `hint` 说还有更大的版本时,把这一点告诉用户,由用户决定要不要换。
 
 用户把 key 发来后运行 `python3 "$S" config set-key <key>`,脚本会联网验证,通过才保存。key 存在本机 `~/.config/poster-dl/config.json`,所有 agent 共用;不要在回复里复述完整的 key。`python3 "$S" config` 可查看当前是否已配置。
 

@@ -118,6 +118,7 @@ Agent   Season posters and language versions need a free TMDB key, and none is s
 | Season posters | — | ✅ |
 | A specific language (Chinese, English, Japanese…) or textless | — | ✅ |
 | List every poster, sorted by rating, and pick one | — | ✅ |
+| Take the largest version available | — | ✅ |
 | Localized titles in search results | — | ✅ |
 
 The key is free: sign up at [themoviedb.org](https://www.themoviedb.org/signup), request one under [Settings → API](https://www.themoviedb.org/settings/api) (choose Developer), then hand it to your agent or run:
@@ -125,6 +126,8 @@ The key is free: sign up at [themoviedb.org](https://www.themoviedb.org/signup),
 ```bash
 python3 scripts/poster_dl.py config set-key <your-key>
 ```
+
+With a key, the default pick is the top-rated poster in the title's original language. That one is not always the largest; when a bigger version exists the result says so, and `--largest` takes it.
 
 The script checks the key online and saves it only if it is valid. It is stored on your machine in `~/.config/poster-dl/config.json` (mode 600) and shared by all your agents. The `TMDB_API_KEY` environment variable works too.
 
@@ -139,6 +142,7 @@ python3 scripts/poster_dl.py download --id tt0903747 --name "BB"      # by id, c
 # These need a TMDB key
 python3 scripts/poster_dl.py download "Breaking Bad" --season 2
 python3 scripts/poster_dl.py download "Inception" --lang none         # textless
+python3 scripts/poster_dl.py download "Spirited Away" --largest      # largest version
 python3 scripts/poster_dl.py list "Inception"                         # every version
 python3 scripts/poster_dl.py download --id tmdb:movie:27205 --pick 3
 ```

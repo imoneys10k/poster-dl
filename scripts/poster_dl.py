@@ -4,7 +4,7 @@
 
 只用 Python 标准库(3.8+),不交互,所有结果以 JSON 输出到 stdout。
 默认走免 key 的 IMDb 搜索接口;配置了 TMDB key 后自动改用 TMDB,
-并解锁分季海报、指定语言版本、多张候选。
+并解锁分季海报、指定语言版本、多张候选。配置后的默认选择是作品原语言里评分最高的一张。
 
 退出码: 0 成功 | 1 其他错误 | 2 参数错误 | 3 有多个候选需要选择
         4 没找到 | 5 需要 TMDB key(或 key 无效)
@@ -519,18 +519,28 @@ def cmd_download(args):
             if not 1 <= args.pick <= len(posters):
                 raise Fail("error", "--pick 超出范围,这个条件下共有 %d 张。" % len(posters))
             chosen = posters[args.pick - 1]
-        elif args.lang:
-            if not posters:
+        else:
+            if args.lang and not posters:
                 raise Fail(
                     "not_found",
                     "「%s」没有 %s 版本的海报。" % (cand["title"], args.lang),
                     hint="去掉 --lang 下载默认版本,或用 list 看有哪些语言。",
                 )
-            chosen = posters[0]
-        else:
-            # 默认取作品原语言里评分最高的一张,没有就取全部里最高的
-            native = filter_lang(posters, cand.get("_orig_lang"))
-            chosen = (native or posters or [None])[0]
+            # 没指定语言时只在作品原语言的版本里选,没有原语言版本再看全部
+            pool = posters if args.lang else filter_lang(posters, cand.get("_orig_lang")) or posters
+            chosen = pool[0] if pool else None
+            if pool and args.largest:
+                # pool 已按评分排序,max 在同宽度里取到的是评分最高的那张
+                chosen = max(pool, key=lambda p: p.get("width") or 0)
+            elif pool:
+                cw = chosen.get("width") or 0
+                bigger = [p for p in pool if (p.get("width") or 0) >= cw * 1.2]
+                if bigger and (target is None or cw < target):
+                    out["hint"] = (
+                        "这是评分最高的版本,宽 %dpx;同条件下还有 %d 张更大的(最宽 %dpx)。"
+                        "加 --largest 直接取最大的一张,或用 list 查看后 --pick 挑选。"
+                        % (cw, len(bigger), max(p.get("width") or 0 for p in bigger))
+                    )
             if chosen is None:
                 # 图片列表为空时退回条目自带的主海报
                 main = cand.get("_poster_path")
@@ -657,6 +667,8 @@ def build_parser():
             d.add_argument("--quality", "-q", choices=list(QUALITIES), default="original",
                            help="low=342px medium=500px high=780px original=原图(默认)")
             d.add_argument("--pick", type=int, help="下载 list 结果里的第 n 张(需要 TMDB key)")
+            d.add_argument("--largest", action="store_true",
+                           help="有多个版本时取分辨率最大的一张,而不是评分最高的(免 key 时只有一张,此项无效果)")
             d.add_argument("--out", "-o", help="保存目录(默认 ~/Downloads/posters)")
             d.add_argument("--force", action="store_true", help="同名文件直接覆盖(默认自动加序号)")
         d.set_defaults(func=func)

@@ -118,6 +118,7 @@ agent   分季海报和语言版本需要一个免费的 TMDB key,目前还没�
 | 分季海报 | — | ✅ |
 | 指定语言:中文、英文、日文……或无字版 | — | ✅ |
 | 列出全部海报,按评分排序后任挑一张 | — | ✅ |
+| 多个版本里直接取分辨率最大的一张 | — | ✅ |
 | 搜索结果显示中文片名 | — | ✅ |
 
 key 是免费的:在 [themoviedb.org](https://www.themoviedb.org/signup) 注册,到 [设置 → API](https://www.themoviedb.org/settings/api) 申请(类型选 Developer),然后把 key 交给 agent,或者自己运行:
@@ -126,7 +127,9 @@ key 是免费的:在 [themoviedb.org](https://www.themoviedb.org/signup) 注册,
 python3 scripts/poster_dl.py config set-key <你的key>
 ```
 
-脚本会先联网验证,通过了才保存。key 只存在本机的 `~/.config/poster-dl/config.json`(权限 600),配一次,所有 agent 共用。也可以用环境变量 `TMDB_API_KEY`。
+配了 key 之后,默认下载的是作品原语言里评分最高的一张。它不一定是最大的,这时结果里会提示还有更大的版本,加 `--largest` 就取最大的那张。
+
+脚本会先联网验证 key,通过了才保存。key 只存在本机的 `~/.config/poster-dl/config.json`(权限 600),配一次,所有 agent 共用。也可以用环境变量 `TMDB_API_KEY`。
 
 ## 不经过 agent,直接用命令行
 
@@ -139,6 +142,7 @@ python3 scripts/poster_dl.py download --id tt0903747 --name 绝命毒师   # 按
 # 以下需要 TMDB key
 python3 scripts/poster_dl.py download "绝命毒师" --season 2
 python3 scripts/poster_dl.py download "流浪地球" --lang none           # 无字版
+python3 scripts/poster_dl.py download "流浪地球" --largest             # 取最大的一张
 python3 scripts/poster_dl.py list "流浪地球"                           # 全部版本
 python3 scripts/poster_dl.py download --id tmdb:movie:535167 --pick 3
 ```
