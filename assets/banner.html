@@ -32,6 +32,8 @@
                font: 600 13px/1.5 "SF Mono", Menlo, monospace; }
   figcaption i { display: block; font-style: normal; font-weight: 400; color: var(--mute); }
   figure.top figcaption b { color: var(--red); }
+  html.social body { height: 640px; }
+  html.social .wrap { height: 420px; margin-top: 110px; }
   html.dark figure svg { outline: 1px solid rgba(246,239,223,.14); outline-offset: -1px; }
 </style>
 <body>
@@ -76,6 +78,7 @@
 <script>
   const h = location.hash;
   if (h.includes("dark")) document.documentElement.classList.add("dark");
+  if (h.includes("social")) document.documentElement.classList.add("social");
   if (h.includes("en")) document.querySelectorAll("[data-en]").forEach(e => e.innerHTML = e.dataset.en);
 </script>
 </body>
