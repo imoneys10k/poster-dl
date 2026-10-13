@@ -1,0 +1,47 @@
+<!doctype html>
+<html lang="zh-CN">
+<meta charset="utf-8">
+<style>
+  :root { --night: #120f29; --panel: #fff6da; --bulb: #ffc53a; --pink: #ff4f8b; --cyan: #3be0d0; --ink: #17141f; }
+  * { box-sizing: border-box; margin: 0; padding: 0; }
+  html, body { background: transparent; }
+  body { width: 860px; font-family: "PingFang SC", sans-serif; }
+  .stage { width: 860px; padding: 34px 48px 38px; border-radius: 18px; overflow: hidden; position: relative;
+           background: radial-gradient(ellipse 70% 60% at 100% 0%, #3a1d5c 0%, transparent 70%), var(--night); }
+  .stage::before { content: ""; position: absolute; inset: 0; background: repeating-linear-gradient(0deg, rgba(255,255,255,.03) 0 1px, transparent 1px 15px); }
+  .chat { position: relative; display: flex; flex-direction: column; gap: 16px; }
+  .who { font: 700 15px/1 "DIN Condensed", "PingFang SC", sans-serif; letter-spacing: .22em; color: #8f84b8; margin-bottom: 8px; }
+  .me { align-self: flex-end; text-align: right; }
+  .me .bubble { display: inline-block; padding: 12px 18px; border-radius: 16px 16px 4px 16px; font: 500 17px/1.4 "PingFang SC"; color: #fff;
+                background: linear-gradient(135deg, #ff5c95, #d9306f); box-shadow: 0 10px 24px -12px rgba(255,79,139,.8); }
+  .bot { align-self: flex-start; }
+  .card { display: flex; gap: 16px; align-items: center; padding: 12px 20px 12px 12px; border-radius: 14px; background: #1d1840; border: 1px solid #332b5e; }
+  .thumb { width: 54px; height: 81px; border-radius: 4px; flex: none; box-shadow: 0 6px 14px -6px #000; }
+  .ok { font: 600 13px/1 "PingFang SC"; color: var(--cyan); letter-spacing: .08em; }
+  .ok::before { content: "✓ "; }
+  .file { margin-top: 8px; font: 600 17px/1.2 "PingFang SC"; color: var(--panel); }
+  .meta { margin-top: 8px; display: flex; gap: 8px; align-items: center; font: 500 12.5px/1 "JetBrainsMono Nerd Font", Menlo, monospace; color: #a79cd0; }
+  .tag { padding: 4px 8px 4px; border-radius: 5px; background: var(--bulb); color: var(--ink); font: 700 14px/1 "DIN Condensed", sans-serif; letter-spacing: .12em; padding-top: 6px; }
+</style>
+<body>
+<div class="stage"><div class="chat">
+  <div class="me"><div class="who" data-en="YOU">你</div><div class="bubble" data-en="Download the Breaking Bad poster">下载《绝命毒师》的海报</div></div>
+  <div class="bot"><div class="who">AGENT</div>
+    <div class="card">
+      <svg class="thumb" viewBox="0 0 54 81"><rect width="54" height="81" fill="#0f4a55"/><circle cx="27" cy="30" r="15" fill="#ffc53a"/><rect y="46" width="54" height="35" fill="#061c24"/><rect x="12" y="58" width="30" height="5" fill="#fff6da"/><rect x="18" y="67" width="18" height="2" fill="#3be0d0"/></svg>
+      <div><div class="ok" data-en="Saved">已保存</div><div class="file" data-en="Breaking Bad (2008) [original].jpg">绝命毒师 (2008) [original].jpg</div>
+        <div class="meta"><span class="tag">ORIGINAL</span><span>2000 × 3000</span><span>·</span><span>~/Downloads/posters</span></div></div>
+    </div>
+  </div>
+  <div class="me"><div class="bubble" data-en="Now the season 2 one, high quality is enough">再来一张第二季的，高清就行</div></div>
+  <div class="bot">
+    <div class="card">
+      <svg class="thumb" viewBox="0 0 54 81"><rect width="54" height="81" fill="#fff6da"/><text x="27" y="44" text-anchor="middle" font-family="DIN Condensed" font-weight="700" font-size="34" fill="#df2750">S02</text><rect y="50" width="54" height="7" fill="#17141f"/><rect x="14" y="65" width="26" height="4" fill="#17141f"/></svg>
+      <div><div class="ok" data-en="Saved">已保存</div><div class="file" data-en="Breaking Bad (2008) S02 [high].jpg">绝命毒师 (2008) S02 [high].jpg</div>
+        <div class="meta"><span class="tag">HIGH</span><span>780 × 1170</span><span>·</span><span>~/Downloads/posters</span></div></div>
+    </div>
+  </div>
+</div></div>
+<script>if (location.hash.includes("en")) document.querySelectorAll("[data-en]").forEach(e => e.textContent = e.dataset.en);</script>
+</body>
+</html>

@@ -1,0 +1,165 @@
+<!doctype html>
+<html lang="zh-CN">
+<meta charset="utf-8">
+<style>
+  :root { --night: #120f29; --plum: #2b174d; --panel: #fff6da; --bulb: #ffc53a; --pink: #ff4f8b; --cyan: #3be0d0; --ink: #17141f; --red: #df2750; }
+  * { box-sizing: border-box; margin: 0; padding: 0; }
+  html, body { background: transparent; }
+  body { width: 860px; font-family: "PingFang SC", sans-serif; }
+  .stage { position: relative; width: 860px; padding: 26px 48px 40px; border-radius: 18px; overflow: hidden;
+           background: radial-gradient(ellipse 80% 40% at 50% 0%, #3a1d5c 0%, transparent 70%), var(--night); }
+  .stage::before { content: ""; position: absolute; inset: 0;
+    background: repeating-linear-gradient(0deg, rgba(255,255,255,.03) 0 1px, transparent 1px 15px); }
+  .head { position: relative; display: flex; align-items: center; justify-content: center; gap: 22px; height: 64px; margin-bottom: 26px; }
+  .head .neon { font: 700 44px/1 "Snell Roundhand", cursive; color: #ffe3ee; transform: rotate(-2deg);
+                text-shadow: 0 0 2px #fff, 0 0 9px var(--pink), 0 0 22px var(--pink), 0 0 46px rgba(255,79,139,.75); }
+  .head .zh { font: 600 15px/1 "PingFang SC"; letter-spacing: .5em; color: #d9fffb; padding: 9px 4px 9px 13px; border: 1.5px solid var(--cyan); border-radius: 6px;
+              text-shadow: 0 0 8px var(--cyan); box-shadow: 0 0 10px rgba(59,224,208,.55), inset 0 0 10px rgba(59,224,208,.35); }
+  .grid { position: relative; display: grid; grid-template-columns: repeat(3, 232px); column-gap: 34px; row-gap: 34px; }
+  .case { padding: 5px; border-radius: 5px; background: linear-gradient(160deg, #4a4266, #1a1630 60%); 
+          box-shadow: 0 0 0 1px #0a0817, 0 0 44px -4px var(--glow), 0 26px 30px -22px #000; }
+  .case svg { display: block; width: 222px; height: 333px; border-radius: 2px; }
+  .plate { margin-top: 15px; padding: 0 2px; }
+  .plate h3 { font: 600 16px/1.2 "PingFang SC"; color: #fff6da; letter-spacing: .02em; }
+  .plate p { margin-top: 6px; font: 400 13px/1.55 "PingFang SC"; color: #b3a9d6; }
+  svg text { font-family: "DIN Condensed", "PingFang SC", sans-serif; }
+  svg .cn { font-family: "Songti SC", "STSong", serif; font-weight: 900; }
+  svg .mono { font-family: "JetBrainsMono Nerd Font", Menlo, monospace; }
+</style>
+<body>
+<div class="stage">
+  <div class="head"><span class="neon">Now Showing</span><span class="zh" data-en="SIX FEATURES">正在上映</span></div>
+  <div class="grid">
+
+    <!-- 1 免 key -->
+    <figure style="--glow: rgba(255,79,139,.55)">
+      <div class="case"><svg viewBox="0 0 222 333">
+        <defs><linearGradient id="g1" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="#ff5c95"/><stop offset="1" stop-color="#c2185a"/></linearGradient></defs>
+        <rect width="222" height="333" fill="url(#g1)"/>
+        <text x="111" y="24" text-anchor="middle" font-size="10.5" letter-spacing="3" fill="#ffe3ee" opacity=".9">POSTER-DL PRESENTS</text>
+        <path d="M111 52 L196 236 L26 236 Z" fill="#fff6da" opacity=".16"/>
+        <circle cx="111" cy="112" r="42" fill="#120f29"/>
+        <path d="M94 136 L128 136 L143 214 L79 214 Z" fill="#120f29"/>
+        <circle cx="111" cy="112" r="7" fill="#ffc53a"/>
+        <text class="cn" x="111" y="272" text-anchor="middle" font-size="35" fill="#fff6da" data-en="NO KEY" data-en-size="44">免KEY即用</text>
+        <rect x="71" y="285" width="80" height="2" fill="#120f29"/>
+        <text x="111" y="304" text-anchor="middle" font-size="11.5" letter-spacing="2.6" fill="#120f29" data-en="NO ACCOUNT · NO SIGN-UP">不注册 · 不登录 · 装完就用</text>
+        <text x="111" y="320" text-anchor="middle" font-size="8.5" letter-spacing="1.8" fill="#120f29" opacity=".7">A FREE SOURCE WORKS OUT OF THE BOX</text>
+      </svg></div>
+      <div class="plate"><h3 data-en="No key needed">免 key 即用</h3><p data-en="The first request after install already works. No account, no sign-up.">装完第一句话就能下载，不用注册任何账号。</p></div>
+    </figure>
+
+    <!-- 2 画质四档 -->
+    <figure style="--glow: rgba(59,224,208,.45)">
+      <div class="case"><svg viewBox="0 0 222 333">
+        <defs><linearGradient id="g2" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="#0f4a55"/><stop offset="1" stop-color="#061c24"/></linearGradient></defs>
+        <rect width="222" height="333" fill="url(#g2)"/>
+        <text x="111" y="24" text-anchor="middle" font-size="10.5" letter-spacing="3" fill="#bff7f0" opacity=".9">PICK YOUR SIZE</text>
+        <g fill="none" stroke="#3be0d0" stroke-width="1.6">
+          <rect x="36" y="42" width="150" height="196" opacity=".45"/>
+          <rect x="36" y="100" width="106" height="138" opacity=".65"/>
+          <rect x="36" y="146" width="70" height="92" opacity=".85"/>
+        </g>
+        <rect x="36" y="178" width="46" height="60" fill="#3be0d0"/>
+        <g font-size="12" letter-spacing="1.2" fill="#bff7f0">
+          <text x="180" y="57" text-anchor="end">ORIGINAL</text>
+          <text x="136" y="115" text-anchor="end">780</text>
+          <text x="100" y="161" text-anchor="end">500</text>
+        </g>
+        <text x="59" y="213" text-anchor="middle" font-size="12" letter-spacing="1" fill="#061c24">342</text>
+        <text class="cn" x="111" y="276" text-anchor="middle" font-size="38" fill="#fff6da" data-en="FOUR SIZES" data-en-size="44">画质四档</text>
+        <rect x="71" y="288" width="80" height="2" fill="#3be0d0"/>
+        <text x="111" y="307" text-anchor="middle" font-size="11.5" letter-spacing="2.6" fill="#bff7f0" data-en="LOW · MEDIUM · HIGH · ORIGINAL">LOW · MEDIUM · HIGH · 原图</text>
+        <text x="111" y="322" text-anchor="middle" font-size="8.5" letter-spacing="1.8" fill="#bff7f0" opacity=".65">NEVER UPSCALED</text>
+      </svg></div>
+      <div class="plate"><h3 data-en="Four sizes">画质四档</h3><p data-en="342px, 500px, 780px or the source file. Never upscaled.">342、500、780 像素和原图。原图不够大时不放大。</p></div>
+    </figure>
+
+    <!-- 3 说片名就行 -->
+    <figure style="--glow: rgba(255,197,58,.5)">
+      <div class="case"><svg viewBox="0 0 222 333">
+        <rect width="222" height="333" fill="#ffc53a"/>
+        <text x="111" y="24" text-anchor="middle" font-size="10.5" letter-spacing="3" fill="#17141f" opacity=".85">ANY LANGUAGE</text>
+        <rect x="150" y="172" width="20" height="74" rx="10" transform="rotate(-42 160 178)" fill="#17141f"/>
+        <circle cx="103" cy="122" r="68" fill="#17141f"/>
+        <circle cx="103" cy="122" r="56" fill="#ffc53a"/>
+        <text class="cn" x="103" y="141" text-anchor="middle" font-size="50" fill="#17141f" data-en="?" data-en-size="96" data-en-y="155">片名</text>
+        <text class="cn" x="111" y="276" text-anchor="middle" font-size="35" fill="#17141f" data-en="SAY THE TITLE" data-en-size="42">说片名就行</text>
+        <rect x="71" y="288" width="80" height="2" fill="#df2750"/>
+        <text x="111" y="307" text-anchor="middle" font-size="11.5" letter-spacing="2.6" fill="#17141f" data-en="CHINESE · ENGLISH · ORIGINAL">中文 · ENGLISH · 原名</text>
+        <text x="111" y="322" text-anchor="middle" font-size="8.5" letter-spacing="1.8" fill="#17141f" opacity=".7">THE FILE IS NAMED THE WAY YOU SAID IT</text>
+      </svg></div>
+      <div class="plate"><h3 data-en="Say the title">中文片名直接搜</h3><p data-en="Chinese, English or the original title. The file is named the way you said it.">中文、英文、原名都行，文件按你说的片名命名。</p></div>
+    </figure>
+
+    <!-- 4 同名不乱猜 -->
+    <figure style="--glow: rgba(120,110,255,.5)">
+      <div class="case"><svg viewBox="0 0 222 333">
+        <defs><linearGradient id="g4" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="#231c5e"/><stop offset="1" stop-color="#0d0a26"/></linearGradient></defs>
+        <rect width="222" height="333" fill="url(#g4)"/>
+        <text x="111" y="24" text-anchor="middle" font-size="10.5" letter-spacing="3" fill="#d6d0ff" opacity=".9">SAME TITLE · TWO FILMS</text>
+        <clipPath id="lens"><circle cx="82" cy="132" r="62"/></clipPath>
+        <circle cx="82" cy="132" r="62" fill="#ffc53a"/>
+        <circle cx="140" cy="132" r="62" fill="#ff4f8b"/>
+        <circle cx="140" cy="132" r="62" fill="#fff6da" clip-path="url(#lens)"/>
+        <text x="50" y="141" text-anchor="middle" font-size="26" fill="#17141f">1984</text>
+        <text x="173" y="141" text-anchor="middle" font-size="26" fill="#17141f">2021</text>
+        <text x="111" y="143" text-anchor="middle" font-size="34" fill="#df2750">?</text>
+        <text class="cn" x="111" y="276" text-anchor="middle" font-size="35" fill="#fff6da" data-en="WHICH ONE?" data-en-size="44">同名不乱猜</text>
+        <rect x="71" y="288" width="80" height="2" fill="#ff4f8b"/>
+        <text x="111" y="307" text-anchor="middle" font-size="11.5" letter-spacing="2.6" fill="#d6d0ff" data-en="IT ASKS · OR ADD THE YEAR">列出候选 · 或带上年份</text>
+        <text x="111" y="322" text-anchor="middle" font-size="8.5" letter-spacing="1.8" fill="#d6d0ff" opacity=".65">NO SILENT GUESSING</text>
+      </svg></div>
+      <div class="plate"><h3 data-en="Asks before guessing">同名不乱猜</h3><p data-en="A 1984 version and a 2021 one? It lists the candidates and you choose.">有 1984 和 2021 两版？列出候选让你选，或直接带上年份。</p></div>
+    </figure>
+
+    <!-- 5 到处通用 -->
+    <figure style="--glow: rgba(170,90,255,.5)">
+      <div class="case"><svg viewBox="0 0 222 333">
+        <defs><radialGradient id="g5" cx=".5" cy=".4" r=".8"><stop offset="0" stop-color="#5b2a9e"/><stop offset="1" stop-color="#1c0e3d"/></radialGradient></defs>
+        <rect width="222" height="333" fill="url(#g5)"/>
+        <text x="111" y="24" text-anchor="middle" font-size="10.5" letter-spacing="3" fill="#ead9ff" opacity=".9">ONE SKILL · EVERY AGENT</text>
+        <g fill="none" stroke="#3be0d0" stroke-width="1" opacity=".55">
+          <ellipse cx="111" cy="136" rx="36" ry="36"/><ellipse cx="111" cy="136" rx="62" ry="62"/><ellipse cx="111" cy="136" rx="88" ry="88"/>
+        </g>
+        <path d="M111 118 L116 131 L130 131 L119 140 L123 154 L111 146 L99 154 L103 140 L92 131 L106 131 Z" fill="#ffc53a"/>
+        <g fill="#fff6da"><circle cx="143" cy="119" r="5"/><circle cx="66" cy="93" r="5"/><circle cx="160" cy="174" r="5"/><circle cx="52" cy="201" r="5"/><circle cx="177" cy="78" r="5"/></g>
+        <g font-size="9.5" letter-spacing="1.4" fill="#ead9ff">
+          <text x="152" y="122">CODEX</text><text x="60" y="84" text-anchor="middle">CLAUDE CODE</text><text x="160" y="190" text-anchor="middle">CURSOR</text>
+          <text x="44" y="222" text-anchor="middle">GEMINI CLI</text><text x="177" y="68" text-anchor="middle">HERMES</text>
+        </g>
+        <text class="cn" x="111" y="276" text-anchor="middle" font-size="38" fill="#fff6da" data-en="ANY AGENT" data-en-size="44">到处通用</text>
+        <rect x="71" y="288" width="80" height="2" fill="#3be0d0"/>
+        <text x="111" y="307" text-anchor="middle" font-size="11.5" letter-spacing="2.6" fill="#ead9ff" data-en="SKILL.MD + ONE PYTHON FILE">SKILL.MD + 一个 PYTHON 脚本</text>
+        <text x="111" y="322" text-anchor="middle" font-size="8.5" letter-spacing="1.8" fill="#ead9ff" opacity=".65">STANDARD LIBRARY ONLY</text>
+      </svg></div>
+      <div class="plate"><h3 data-en="Works across agents">到处通用</h3><p data-en="A standard SKILL.md plus one Python script with zero dependencies.">标准 SKILL.md 加一个零依赖脚本，能跑 shell 的 agent 都能用。</p></div>
+    </figure>
+
+    <!-- 6 加映 -->
+    <figure style="--glow: rgba(255,246,218,.4)">
+      <div class="case"><svg viewBox="0 0 222 333">
+        <rect width="222" height="333" fill="#fff6da"/>
+        <text x="111" y="24" text-anchor="middle" font-size="10.5" letter-spacing="3" fill="#17141f" opacity=".85">WITH A FREE TMDB KEY</text>
+        <text x="111" y="176" text-anchor="middle" font-size="176" fill="#df2750" letter-spacing="-2">S02</text>
+        <rect x="0" y="186" width="222" height="26" fill="#17141f"/>
+        <text x="111" y="204" text-anchor="middle" font-size="12.5" letter-spacing="2.6" fill="#fff6da" data-en="SEASONS · LANGUAGES · TEXTLESS">分季 · 语言版本 · 无字版</text>
+        <text class="cn" x="111" y="266" text-anchor="middle" font-size="46" fill="#17141f" data-en="BONUS FEATURE" data-en-size="42" data-en-y="262">加映</text>
+        <rect x="71" y="288" width="80" height="2" fill="#df2750"/>
+        <text x="111" y="307" text-anchor="middle" font-size="11.5" letter-spacing="2.6" fill="#17141f" data-en="EVERY VERSION · THE LARGEST ONE">全部版本任挑 · 取最大的一张</text>
+        <text x="111" y="322" text-anchor="middle" font-size="8.5" letter-spacing="1.8" fill="#17141f" opacity=".7">THE SKILL WALKS YOU THROUGH SETUP</text>
+      </svg></div>
+      <div class="plate"><h3 data-en="More with a free TMDB key">配 key 加映</h3><p data-en="Season posters, language versions, textless art, and the largest file available.">配上免费的 TMDB key：分季海报、语言版本、无字版、最大尺寸。</p></div>
+    </figure>
+  </div>
+</div>
+<script>
+  if (location.hash.includes("en")) document.querySelectorAll("[data-en]").forEach(e => {
+    e.textContent = e.dataset.en;
+    if (e.dataset.enSize) { e.setAttribute("font-size", e.dataset.enSize); e.setAttribute("class", ""); }
+    if (e.dataset.enY) e.setAttribute("y", e.dataset.enY);
+    if (e.classList.contains("zh")) e.style.letterSpacing = ".3em";
+  });
+</script>
+</body>
+</html>

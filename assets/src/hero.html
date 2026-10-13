@@ -1,0 +1,102 @@
+<!doctype html>
+<html lang="zh-CN">
+<meta charset="utf-8">
+<style>
+  :root {
+    --night: #120f29; --plum: #2b174d; --dusk: #4b2468;
+    --panel: #fff6da; --bulb: #ffc53a; --pink: #ff4f8b; --cyan: #3be0d0; --ink: #17141f; --red: #df2750;
+  }
+  * { box-sizing: border-box; margin: 0; padding: 0; }
+  html, body { background: transparent; }
+  body { width: 860px; font-family: "PingFang SC", sans-serif; }
+  .stage { position: relative; width: 860px; height: 470px; border-radius: 18px; overflow: hidden;
+           background:
+             radial-gradient(ellipse 70% 55% at 50% 44%, rgba(255,205,110,.20), transparent 70%),
+             radial-gradient(ellipse 90% 70% at 50% 118%, var(--dusk) 0%, var(--plum) 42%, transparent 78%),
+             var(--night); }
+  /* 砖墙纹理:很淡,只为让墙面不是一块死色 */
+  .stage::before { content: ""; position: absolute; inset: 0; opacity: .5;
+    background: repeating-linear-gradient(0deg, rgba(255,255,255,.03) 0 1px, transparent 1px 15px); }
+  .neon { position: absolute; left: 0; right: 0; top: 22px; text-align: center;
+          font: 400 40px/1 "Snell Roundhand", "Brush Script MT", cursive; font-weight: 700; color: #ffe3ee; letter-spacing: .01em;
+          text-shadow: 0 0 2px #fff, 0 0 9px var(--pink), 0 0 22px var(--pink), 0 0 46px rgba(255,79,139,.75); transform: rotate(-2.5deg); }
+  .marquee { position: absolute; left: 80px; right: 80px; top: 84px; height: 284px; border-radius: 12px;
+             background: #0c0a18; padding: 17px;
+             box-shadow: 0 0 0 1px #2b2546, 0 24px 60px -18px #000, 0 0 90px rgba(255,197,58,.28); }
+  /* 一圈灯泡:亮暗交替 */
+  .bulbs { position: absolute; inset: 0; border-radius: 12px; pointer-events: none; }
+  .bulbs i { position: absolute; width: 7px; height: 7px; border-radius: 50%; background: #fff7d1;
+             box-shadow: 0 0 4px 1px #ffd45c, 0 0 12px 3px rgba(255,180,40,.75); }
+  .bulbs i.dim { background: #b98a2a; box-shadow: 0 0 3px rgba(255,180,40,.35); }
+  .board { position: relative; height: 100%; border-radius: 4px; overflow: hidden;
+           background: linear-gradient(180deg, #fffbea 0%, var(--panel) 55%, #ffecbd 100%);
+           box-shadow: inset 0 0 26px rgba(214,150,40,.38), inset 0 0 0 1px rgba(120,80,10,.25);
+           display: grid; grid-template-rows: 138px 62px 1fr; }
+  .board::after { content: ""; position: absolute; inset: 0; pointer-events: none;
+           background: repeating-linear-gradient(90deg, rgba(120,90,30,.07) 0 1px, transparent 1px 86px); }
+  .row { display: flex; align-items: flex-end; justify-content: center; border-bottom: 3px solid #2c2638; position: relative; }
+  .row:last-child { border-bottom: 0; }
+  .row b { display: inline-block; font-weight: 700; color: var(--ink); }
+  .r1 { padding-bottom: 0; }
+  .r1 b { font: 700 140px/1 "DIN Condensed", "Avenir Next Condensed", Impact, sans-serif; margin: 0 2.5px -31px; transform-origin: 50% 80%; }
+  .r1 b.red { color: var(--red); }
+  .r1 b:nth-child(2) { transform: rotate(-.7deg); }
+  .r1 b:nth-child(5) { transform: rotate(1.6deg) translateY(1px); }
+  .r1 b:nth-child(8) { transform: rotate(-.9deg); }
+  .r2 { padding-bottom: 7px; }
+  .r2 b { font: 600 36px/1 "PingFang SC", sans-serif; margin: 0 5px; letter-spacing: 0; }
+  .r2 b.gap { width: 26px; }
+  .r2 b:nth-child(3) { transform: rotate(1.2deg); }
+  .r2.en b { font: 700 43px/1 "DIN Condensed", sans-serif; margin: 0 1.5px -6px; }
+  .r2.en { padding-bottom: 0; }
+  .r3 { align-items: center; }
+  .r3 span { font: 700 25px/1 "DIN Condensed", "PingFang SC", sans-serif; letter-spacing: .16em; color: var(--ink); padding-top: 5px; }
+  .r3 span em { font-style: normal; color: var(--red); padding: 0 .5em; }
+  .r3.zh span { font: 600 19px/1 "PingFang SC", sans-serif; letter-spacing: .22em; padding-top: 0; }
+  html.social .stage { height: 430px; border-radius: 0; }
+  html.social .neon { top: 12px; }
+  html.social .marquee { top: 64px; }
+  html.social .ticket { top: 366px; }
+  /* 票根:安装命令 */
+  .ticket { position: absolute; left: 50%; top: 396px; transform: translateX(-50%) rotate(-1.2deg); height: 46px; display: flex; white-space: nowrap;
+            filter: drop-shadow(0 10px 14px rgba(0,0,0,.55)); }
+  .ticket div { background: var(--bulb); color: var(--ink); display: flex; align-items: center; }
+  .stub { padding: 0 14px 0 18px; font: 700 19px/1 "DIN Condensed", sans-serif; letter-spacing: .16em; border-radius: 6px 0 0 6px;
+          border-right: 2px dashed rgba(23,20,31,.55); padding-top: 4px; }
+  .cmd { padding: 0 22px 0 18px; font: 600 16px/1 "JetBrainsMono Nerd Font", "JetBrains Mono", "SF Mono", Menlo, monospace; border-radius: 0 6px 6px 0; }
+  .cmd::before { content: "$"; opacity: .5; margin-right: 10px; }
+</style>
+<body>
+<div class="stage">
+  <div class="neon">an agent skill</div>
+  <div class="marquee">
+    <div class="board">
+      <div class="row r1"><b>P</b><b>O</b><b>S</b><b>T</b><b>E</b><b>R</b><b class="red">-</b><b class="red">D</b><b class="red">L</b></div>
+      <div class="row r2" id="r2"><b>说</b><b>出</b><b>片</b><b>名</b><b class="gap"></b><b>海</b><b>报</b><b>到</b><b>手</b></div>
+      <div class="row r3 zh" id="r3"><span>免 KEY<em>★</em>画质四档<em>★</em>所有 AGENT 通用</span></div>
+    </div>
+    <div class="bulbs" id="bulbs"></div>
+  </div>
+  <div class="ticket"><div class="stub">ADMIT ONE</div><div class="cmd">npx skills add imoneys10k/poster-dl</div></div>
+</div>
+<script>
+  // 沿灯箱四边摆一圈灯泡
+  const m = document.querySelector(".marquee"), box = document.getElementById("bulbs");
+  const W = m.clientWidth, H = m.clientHeight, inset = 8.5, step = 19.4;
+  const pts = [];
+  const nx = Math.round((W - 2 * inset) / step), ny = Math.round((H - 2 * inset) / step);
+  for (let i = 0; i <= nx; i++) pts.push([inset + i * (W - 2 * inset) / nx, inset]);
+  for (let i = 1; i <= ny; i++) pts.push([W - inset, inset + i * (H - 2 * inset) / ny]);
+  for (let i = nx - 1; i >= 0; i--) pts.push([inset + i * (W - 2 * inset) / nx, H - inset]);
+  for (let i = ny - 1; i >= 1; i--) pts.push([inset, inset + i * (H - 2 * inset) / ny]);
+  pts.forEach(([x, y], i) => { const b = document.createElement("i"); b.style.left = (x - 3.5) + "px"; b.style.top = (y - 3.5) + "px"; if (i % 3 === 2) b.className = "dim"; box.appendChild(b); });
+  if (location.hash.includes("social")) document.documentElement.classList.add("social");
+  if (location.hash.includes("en")) {
+    const r2 = document.getElementById("r2"); r2.classList.add("en");
+    r2.innerHTML = "NAME THE TITLE. GET THE POSTER.".split("").map(c => c === " " ? '<b style="width:11px"></b>' : "<b>" + c + "</b>").join("");
+    const r3 = document.getElementById("r3"); r3.classList.remove("zh");
+    r3.innerHTML = "<span>NO API KEY<em>★</em>FOUR SIZES<em>★</em>ANY AGENT</span>";
+  }
+</script>
+</body>
+</html>
