@@ -1,0 +1,82 @@
+<!doctype html>
+<html lang="zh-CN">
+<meta charset="utf-8">
+<style>
+  :root {
+    --bg: #f3ede1; --ink: #1b1815; --mute: #6f665b; --rule: #d9cfbe;
+    --amber: #e3a02f; --red: #cf4327; --night: #1d2733; --cream: #f6efdf;
+  }
+  html.dark {
+    --bg: #131110; --ink: #f3ead9; --mute: #9a8f80; --rule: #2e2925;
+    --amber: #eaa838; --red: #dc5236; --night: #222e3c; --cream: #f6efdf;
+  }
+  * { box-sizing: border-box; margin: 0; }
+  body { width: 1280px; height: 420px; background: var(--bg); color: var(--ink); overflow: hidden;
+         font-family: "PingFang SC", "SF Pro Text", sans-serif; }
+  .wrap { display: grid; grid-template-columns: 500px 1fr; height: 100%; padding: 0 64px; }
+  .left { display: flex; flex-direction: column; justify-content: center; }
+  .kicker { font: 600 13px/1 "SF Mono", Menlo, monospace; letter-spacing: .22em; color: var(--red); }
+  h1 { font: 700 118px/.86 "DIN Condensed", "Avenir Next Condensed", sans-serif; letter-spacing: .01em;
+       margin: 26px 0 0 -3px; text-transform: uppercase; }
+  h1 span { color: var(--red); }
+  .tag { font-size: 25px; font-weight: 600; letter-spacing: .04em; margin-top: 6px; }
+  .billing { margin-top: 30px; padding-top: 14px; border-top: 1px solid var(--rule);
+             font: 500 17px/1.35 "DIN Condensed", "Avenir Next Condensed", sans-serif; letter-spacing: .2em;
+             color: var(--mute); text-transform: uppercase; }
+  .billing b { color: var(--ink); font-weight: 700; }
+  .right { display: flex; align-items: flex-end; justify-content: flex-end; gap: 30px; padding-bottom: 62px; position: relative; }
+  .right::after { content: ""; position: absolute; left: 34px; right: 0; bottom: 61px; border-top: 1px solid var(--rule); }
+  figure { display: flex; flex-direction: column; align-items: center; position: relative; }
+  figure svg { display: block; border-radius: 3px; box-shadow: 0 1px 0 rgba(0,0,0,.08), 0 14px 28px -14px rgba(0,0,0,.45); }
+  figcaption { position: absolute; top: 100%; margin-top: 14px; text-align: center; white-space: nowrap;
+               font: 600 13px/1.5 "SF Mono", Menlo, monospace; }
+  figcaption i { display: block; font-style: normal; font-weight: 400; color: var(--mute); }
+  figure.top figcaption b { color: var(--red); }
+  html.dark figure svg { outline: 1px solid rgba(246,239,223,.14); outline-offset: -1px; }
+</style>
+<body>
+<svg width="0" height="0" style="position:absolute">
+  <defs>
+    <linearGradient id="sky" x1="0" y1="0" x2="0" y2="1">
+      <stop offset="0" stop-color="#1d2733"/><stop offset=".62" stop-color="#3a3340"/><stop offset="1" stop-color="#8f3b2a"/>
+    </linearGradient>
+    <symbol id="poster" viewBox="0 0 200 300">
+      <rect width="200" height="300" fill="url(#sky)"/>
+      <circle cx="100" cy="128" r="58" fill="#e3a02f"/>
+      <rect x="0" y="138" width="200" height="5" fill="#3a3340" opacity=".55"/>
+      <rect x="0" y="151" width="200" height="8" fill="#3a3340" opacity=".7"/>
+      <rect x="0" y="167" width="200" height="12" fill="#3a3340" opacity=".85"/>
+      <path d="M0 196 L46 170 L78 188 L118 160 L160 186 L200 168 L200 300 L0 300Z" fill="#141a22"/>
+      <path d="M0 222 L38 204 L88 226 L132 200 L200 224 L200 300 L0 300Z" fill="#0d1117"/>
+      <rect x="97" y="186" width="3" height="16" fill="#f6efdf"/><circle cx="98.5" cy="182" r="3" fill="#f6efdf"/>
+      <rect x="22" y="22" width="46" height="4" fill="#f6efdf" opacity=".85"/>
+      <rect x="132" y="22" width="46" height="4" fill="#f6efdf" opacity=".85"/>
+      <rect x="40" y="238" width="120" height="13" fill="#f6efdf"/>
+      <rect x="62" y="258" width="76" height="4" fill="#cf4327"/>
+      <g fill="#f6efdf" opacity=".5">
+        <rect x="30" y="274" width="140" height="2"/><rect x="44" y="280" width="112" height="2"/><rect x="58" y="286" width="84" height="2"/>
+      </g>
+    </symbol>
+  </defs>
+</svg>
+<div class="wrap">
+  <div class="left">
+    <div class="kicker" data-en="AGENT SKILL · MOVIE &amp; TV POSTERS">AGENT SKILL · 影视海报下载</div>
+    <h1>Poster<span>-</span>DL</h1>
+    <div class="tag" data-en="Name the title. Get the poster.">说出片名，海报到手。</div>
+    <div class="billing"><b data-en="No API key">免 Key</b> · <b data-en="Four quality tiers">画质四档</b> · <b data-en="Zero dependencies">零依赖</b><br>Claude Code · Codex · Cursor · Gemini CLI · Hermes</div>
+  </div>
+  <div class="right">
+    <figure><svg width="62" height="93"><use href="#poster"/></svg><figcaption>low<i>342 px</i></figcaption></figure>
+    <figure><svg width="92" height="138"><use href="#poster"/></svg><figcaption>medium<i>500 px</i></figcaption></figure>
+    <figure><svg width="136" height="204"><use href="#poster"/></svg><figcaption>high<i>780 px</i></figcaption></figure>
+    <figure class="top"><svg width="196" height="294"><use href="#poster"/></svg><figcaption><b>original</b><i data-en="often 2000×3000">原图 · 常见 2000×3000</i></figcaption></figure>
+  </div>
+</div>
+<script>
+  const h = location.hash;
+  if (h.includes("dark")) document.documentElement.classList.add("dark");
+  if (h.includes("en")) document.querySelectorAll("[data-en]").forEach(e => e.innerHTML = e.dataset.en);
+</script>
+</body>
+</html>
